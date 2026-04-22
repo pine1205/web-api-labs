@@ -18,6 +18,13 @@ useEffect(() => {
     });
   }, []);
 
+  const [ formState, setFormState ] = useState({
+    title: "",
+    description: "",
+    deadline: "",
+    priority: "Low"
+  });
+
      const doneHandler = (taskIndex) => {
       const tasks = [...taskState.tasks];
       tasks[taskIndex].done = !tasks[taskIndex].done;
@@ -66,12 +73,7 @@ useEffect(() => {
   
 
 
-   const [ formState, setFormState ] = useState({
-    title: "",
-    description: "",
-    deadline: "",
-    priority: "Low"
-  });
+   
 
 
   console.log(formState);

@@ -3,6 +3,8 @@ import express from 'express';
 import tasksRouter from './api/tasks';
 import './db';
 import cors from 'cors';
+import usersRouter from './api/users';
+
 
 
 
@@ -35,6 +37,11 @@ app.use(express.json());
 
 
 app.use('/api/tasks', tasksRouter);
+
+//Users router
+app.use('/api/users', usersRouter);
+
+
 
 
 app.use(errHandler);
