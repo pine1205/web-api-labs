@@ -11,7 +11,14 @@ const TaskSchema = new Schema({
   updated_at: Date,
   
 title: { type: String, required: true },
-priority: { type: String, enum: ["Low", "Medium", "High"], required: true }
+priority: { type: String, enum: ["Low", "Medium", "High"], required: true },
+userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+}
+//ref: User - it is a reference to another collection (User model in users collection)
+//this ObjectId belongs to a document in User collection
+
 
 });
 
