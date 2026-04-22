@@ -46,7 +46,13 @@ router.post('/', asyncHandler(async (req, res) => {
 
 
 async function registerUser(req, res) {
-    // Add input validation logic here
+
+let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+let result = pattern.test(req.body.password);
+
+        if (!result) {
+            return res.status(400).json({ success: false, msg: 'Password must be 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character.' });
+        }
     await User.create(req.body);
     res.status(201).json({ success: true, msg: 'User successfully created.' });
 }
@@ -66,6 +72,8 @@ async function authenticateUser(req, res) {
         res.status(401).json({ success: false, msg: 'Wrong password.' });
     }
 }
+
+
 
 //  The authenticateUser() function, creates the JWT token using the SECRET and signed with the username (essentially,
 //  we encode the user name in the token). The token is then returned to the client for use in future requests.
