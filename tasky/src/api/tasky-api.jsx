@@ -1,11 +1,21 @@
 
 
 export const getTasks = async () => {
-    const  res = await fetch(
-        `http://localhost:8080/api/tasks`
+    const response = await fetch(
+        `http://localhost:8080/api/tasks`, {
+            headers: {
+                'Authorization': window.localStorage.getItem('token')          
+            }
+        }
     )
-        return res.json();
+    return response.json();
 };
+//In the above code, notice how the JWT token is retrieved from local storage and included in the request header.
+//Gets the JWT token from browser storage:
+//Sends it to the backend inside the request header. This tells the server: “This user is logged in. Here is their token.”
+// it verifies the token; checks if it's valid; allows or denies access
+//return response.json()  - Converts server response into JavaScript object. Gives me the actual tasks data
+
 
 export const addTask = async(data) => {
     const res = await fetch(
@@ -14,6 +24,7 @@ export const addTask = async(data) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': window.localStorage.getItem('token')
             },
             body: JSON.stringify(data)
         }
@@ -21,15 +32,22 @@ export const addTask = async(data) => {
         return res.json();
 };
 
+
+
+
 export const deleteTask = async (id) => {
     const res =  fetch(
         `http://localhost:8080/api/tasks/${id}`,
         {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': window.localStorage.getItem('token')
+            }
         }
     )
     return res;
 };
+
 
 export const updateTask = async (data) => {
     const res = await fetch(
@@ -38,12 +56,14 @@ export const updateTask = async (data) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': window.localStorage.getItem('token')
             },
             body: JSON.stringify(data)
         }
     )
         return res.json();
 };
+
 
 
 export const login = async (username, password) => {
