@@ -67,3 +67,18 @@ export const signup = async (username, password) => {
     });
     return response.json();
 };
+//when i am sending request i need to tell the server how and what kind of data i am sending
+//"POST" → send data (login/signup)
+// "GET" → retrieve data
+// "PUT" / "PATCH" → update data
+
+//headers: {
+ // "Content-Type": "application/json"}  - This tells the server taht I’m sending data in JSON format
+ //The body is the actual data you send to the server. For login/signup, that’s: username, password
+
+// User enters username + password
+// Frontend sends data → Express API
+// API validates user
+// API returns JWT token
+// Frontend saves token in localStorage
+// Future requests include the token
