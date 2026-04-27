@@ -4,12 +4,13 @@ export const getTasks = async () => {
     const response = await fetch(
         `http://localhost:8080/api/tasks`, {
             headers: {
-                'Authorization': window.localStorage.getItem('token')          
+                'Authorization': window.localStorage.getItem('token')
             }
         }
     )
     return response.json();
 };
+
 //In the above code, notice how the JWT token is retrieved from local storage and included in the request header.
 //Gets the JWT token from browser storage:
 //Sends it to the backend inside the request header. This tells the server: “This user is logged in. Here is their token.”
